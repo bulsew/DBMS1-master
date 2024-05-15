@@ -1,4 +1,4 @@
-#ifndef PARSER_H
+﻿#ifndef PARSER_H
 #define PARSER_H
 #include <QDebug>
 #include <QRegularExpression>
@@ -22,7 +22,7 @@ public:
     bool alter_table(QString text);
     bool select_from(QString text);
     string singlecolumn_constraints(QString text);
-    string multicolumn_constraints(QString text);
+    vector<string> multicolumn_constraints(QString text);
      QString processColumnDefinition(const QString &tableDefinition, bool& isPrimaryKey, string& forignKeyName, string &forignKeyTable, string &default_content);
 public:
     Parser(DB *db);
