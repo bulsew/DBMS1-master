@@ -9,8 +9,11 @@ int main(int argc, char *argv[])
 
     QApplication a(argc, argv);
 
-
-
+//    DB *db;
+//    Table c("sc",db);
+//    string cp=c.DBadd;
+//    cp.pop_back();
+//    c.backupFolder(QString::fromStdString(cp));
     MainWindow w;
     w.show();
 //    string add="D:\\program\\QT\\DBMS\\Ruanko\\test1\\sc";
@@ -19,5 +22,7 @@ int main(int argc, char *argv[])
 
 
     return a.exec();
+
+
     //Table aa("student");
 }

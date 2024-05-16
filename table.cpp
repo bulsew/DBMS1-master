@@ -94,9 +94,9 @@ bool Table::instertTOTable(const string& content, const string& correspond)//修
     {
         if(content_v.size()!=rows.size()||correspond_v.size()!=rows.size())//数目不一直接报错
         {
-            for(auto p : content_v)cout<<p<<endl;
-            for(auto p : rows)cout<<p.rowName<<endl;
-            for(auto p : correspond_v)cout<<p<<endl;
+//            for(auto p : content_v)cout<<p<<endl;
+//            for(auto p : rows)cout<<p.rowName<<endl;
+//            for(auto p : correspond_v)cout<<p<<endl;
             cerr<<"no matching insert error"<<content_v.size() <<rows.size() <<correspond_v.size() <<endl;
             return false;
         }
@@ -1438,15 +1438,15 @@ bool Table::selectallfrom(const string& tableName,const vector<string>rowname,co
            //输出每一行第i列的数据
         for(unsigned int i=0;i<accordrowsindex.size();i++)
         {
-            cout<<tokens[i];
+            //cout<<tokens[i];
             //加|成新的一行数据
             newdata.append(tokens[i]);
              newdata.append("|");
         }
-        cout<<endl;
+        //cout<<endl;
         //去掉最后一个|,建表
         newdata.pop_back();
-        newtable.instertTOTable(newdata,newtablerowsname);
+        newtable.instertTOTable(newdata);
     }
     return true;
 }
@@ -1490,11 +1490,11 @@ bool Table::selectfrom(const vector<string>& selectedrows ,const string& tableNa
     }
 
     //打印列名
-    for(const auto& selectedrow:selectedrows)
-    {
-        cout<<selectedrow<<" ";
-    }
-    cout<<endl;
+//    for(const auto& selectedrow:selectedrows)
+//    {
+//        cout<<selectedrow<<" ";
+//    }
+//    cout<<endl;
 
     //建表
     string newtablename = tableName+"select";
@@ -1561,15 +1561,15 @@ bool Table::selectfrom(const vector<string>& selectedrows ,const string& tableNa
            //输出每一行第i列的数据
         for(unsigned int i=0;i<accordrowsindex.size();i++)
         {
-            cout<<tokens[i];
+           // cout<<tokens[i];
             //加|成新的一行数据
             newdata.append(tokens[i]);
              newdata.append("|");
         }
-        cout<<endl;
+        //cout<<endl;
         //去掉最后一个|,建表
         newdata.pop_back();
-        newtable.instertTOTable(newdata,newtablerowsname);
+        newtable.instertTOTable(newdata);
     }
     return true;
 }

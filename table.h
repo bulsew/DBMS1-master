@@ -1,4 +1,4 @@
-#ifndef TABLE_H
+﻿#ifndef TABLE_H
 #define TABLE_H
 #include <QFile>
 #include <QDir>
@@ -14,6 +14,7 @@
 #include <QDate>
 #include"constrain.h"
 #include<limits>
+#include <QDirIterator>
 #include <cmath>
 #include"db.h"
 using namespace std;
@@ -769,6 +770,66 @@ public:
 //        string row_b;
 
 //    };
+    void copyFolder(const QString &srcFolder, const QString &destFolder) {
+        QDir srcDir(srcFolder);
+        QDir destDir(destFolder);
+
+        if (!destDir.exists()) {
+            destDir.mkpath(".");
+        }
+
+        QDirIterator it(srcFolder, QDir::Files | QDir::Dirs | QDir::NoDotAndDotDot, QDirIterator::Subdirectories);
+        while (it.hasNext()) {
+            it.next();
+            QString srcPath = it.filePath();
+            QString destPath = destFolder + "/" + srcDir.relativeFilePath(srcPath);
+
+            if (QFileInfo(srcPath).isDir()) {
+                destDir.mkpath(destPath);
+            } else {
+                QFile::copy(srcPath, destPath);
+            }
+        }
+    }
+
+    void backupFolder(const QString &folderPath) {
+        QDir dir(folderPath);
+        QString parentDir = dir.absolutePath();
+        QString folderName = dir.dirName();
+
+        QString backupFolderPath = parentDir + "/" + folderName + "_backup";
+
+        if (QDir(backupFolderPath).exists()) {
+            qDebug() << "备份文件夹已存在，无法继续备份。";
+            return;
+        }
+
+        copyFolder(folderPath, backupFolderPath);
+
+        qDebug() << "文件夹 '" << folderName << "' 已成功备份到 '" << backupFolderPath << "'";
+    }
+
+    // 还原文件夹函数
+    void restoreFolder(const QString &folderPath) {
+        QDir dir(folderPath);
+        QString parentDir = dir.absolutePath();
+        QString folderName = dir.dirName();
+
+        QString backupFolderPath = parentDir + "/" + folderName + "_backup";
+
+        if (!QDir(backupFolderPath).exists()) {
+            qDebug() << "备份文件夹不存在，无法还原。";
+            return;
+        }
+
+        // 删除原文件夹
+        QDir().rmdir(folderPath);
+
+        // 重命名备份文件夹为原文件夹名称
+        QDir().rename(backupFolderPath, folderPath);
+
+        qDebug() << "文件夹 '" << folderName << "' 已成功还原";
+    }
 
 
 
