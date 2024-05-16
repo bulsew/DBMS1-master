@@ -232,11 +232,11 @@ void MainWindow::pushButtonDownloadAllClicked()
         QString content = textEdit->toPlainText();
         //p.parsermulty(content);
         p.parserfirst(content);
-        Table c("sc",db);
-        string cp=c.DBadd;
-        cp.pop_back();
-        c.backupFolder(QString::fromStdString(cp));
-        //p.insert_table(content);
+//        Table c("sc",db);
+//        string cp=c.DBadd;
+//        cp.pop_back();
+//        c.backupFolder(QString::fromStdString(cp));
+//        //p.insert_table(content);
         qDebug() << content;
         textEdit->clear();
     }
