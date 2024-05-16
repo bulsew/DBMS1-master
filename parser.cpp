@@ -960,8 +960,23 @@ QString Parser::processColumnDefinition(const QString &columnDefinition, bool& i
                  {
                      QString column_name = regex_column_match.captured(1);
                      QString column_type = regex_column_match.captured(2);
+                     //填入内容
+                    string rowType;
+                     if(column_type.toLower() == "int")
+                     {
+                         rowType = "INT";
+                     }
+                     if(column_type.toLower() == "double")
+                     {
+                         rowType = "DOUBLE";
+                     }
+                     if(column_type.toLower() == "char")
+                     {
+                         rowType = "CHAR";
+                     }
+
                      class_A=Table::alter_class::ROW;
-                     content_a = column_name.toStdString()+"|"+column_type.toStdString();
+                     content_a = column_name.toStdString()+"|"+rowType;
                      constrainn_a = "";
                      break;
                  }
@@ -989,7 +1004,22 @@ QString Parser::processColumnDefinition(const QString &columnDefinition, bool& i
                      QString column_name = regex_type_match.captured(1);
                       QString column_type = regex_type_match.captured(2);
                      class_A=Table::alter_class::ROW;
-                     content_a = column_name.toStdString()+"|"+column_type.toStdString();
+
+                     string rowType;
+                      if(column_type.toLower() == "int")
+                      {
+                          rowType = "INT";
+                      }
+                      if(column_type.toLower() == "double")
+                      {
+                          rowType = "DOUBLE";
+                      }
+                      if(column_type.toLower() == "char")
+                      {
+                          rowType = "CHAR";
+                      }
+
+                     content_a = column_name.toStdString()+"|"+rowType;
                      constrainn_a ="";
 
 
