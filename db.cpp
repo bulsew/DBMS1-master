@@ -1,4 +1,4 @@
-#include "db.h"
+﻿#include "db.h"
 
 DB::DB()
 {
@@ -130,32 +130,28 @@ bool DB::createUserdb(QString USERdbName)
  }
  bool DB::dropdb(QString dbname)
  {
-     QString dirPath = SYSTEMfolderPath +  QDir::separator() + dbname;
-     QDir dir(dirPath);
 
-         // 检查目录是否存在
-         if (!dir.exists()) {
-             qDebug() << "db" << dirPath << "does not exist.";
-             return false;
-         }
 
-         // 获取目录中的所有文件和子目录
-         QFileInfoList fileInfoList = dir.entryInfoList(QDir::Files | QDir::Dirs | QDir::NoDotAndDotDot);
+     QString add_Q=SYSTEMfolderPath +  QDir::separator() + dbname;
+     QDir dir(add_Q);
+     if (!dir.exists())
+     {
+         qDebug() << "Folder does not exist:" << add_Q;
+         return false;
+     }
 
-         // 检查目录是否为空
-         if (fileInfoList.isEmpty()) {
-             // 删除空目录
-             if (dir.rmdir(dirPath)) {
-                 qDebug() << "Empty db" << dirPath << "removed successfully.";
-                 return true;
-             } else {
-                 qDebug() << "Failed to remove empty db" << dirPath;
-                 return false;
-             }
-         } else {
-             qDebug() << "db" << dirPath << "is not empty.";
-             return false;
-         }
+     if (dir.removeRecursively())
+     {
+         qDebug() << "Folder deleted successfully:" << add_Q;
+         return true;
+     }
+     else
+     {
+         qDebug() << "Error deleting folder:" << add_Q;
+         return false;
+     }
+
+
 
  }
 

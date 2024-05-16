@@ -1,4 +1,4 @@
-
+﻿
 #include "mainwindow.h"
 #include <QApplication>
 #include"db.h"
@@ -13,6 +13,8 @@ int main(int argc, char *argv[])
 
     MainWindow w;
     w.show();
+//    string add="D:\\program\\QT\\DBMS\\Ruanko\\test1\\sc";
+//    if (!readFromFile(add)) cerr << "Error finding tabel." <<"  "<<add<<"   ."<< endl;
 
 
 

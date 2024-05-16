@@ -22,7 +22,7 @@ public:
     bool alter_table(QString text);
     bool select_from(QString text);
     string singlecolumn_constraints(QString text);
-    vector<string> multicolumn_constraints(QString text);
+    pair<vector<string>, vector<string>> multicolumn_constraints(QString text);
      QString processColumnDefinition(const QString &tableDefinition, bool& isPrimaryKey, string& forignKeyName, string &forignKeyTable, string &default_content);
 public:
     Parser(DB *db);
@@ -30,6 +30,7 @@ public:
     QString parserfirst(QString text);
     QString parserSecond();
     bool parsermulty(QString text);
+
 
 
     DB *db;
